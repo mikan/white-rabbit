@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    h1= title
+    if !authenticated
+        form(action = '/login', method = 'post')
+            .form-group
+                label.form-control-label(for='username') LDAP ID:
+                input.form-control(type='text', id='username', name='username', required)
+            .form-group
+                label.form-control-label(for='password') Password:
+                input.form-control(type='password', id='password', name='password', required)
+            .form-group
+                input.form-control.btn-primary(type='submit', value='Login')
+    else
+        form(action = '/', method = 'get')
+            .form-group
+                input.form-control(type='text', id='q', name='q', placeholder='Keyword... (Accepts only one keyword)')
+            //- TODO: Retrieve list of channel from Slack API
+            .form-group
+                label.form-control-label(for='channel') Channel:
+                select.form-control(id='channel', name='channel')
+                    option(value='') All
+                    option(value='C0FFASVM1') _全体連絡
+                    option(value='C0FFASVMH') _雑談
+                    option(value='C47000197') オフ会
+                    option(value='C110B69M0') サイト管理
+                    option(value='C135YCV0V') セミナー
+                    option(value='C4WMJULPN') 個人制作
+                    option(value='C1QBGLWT1') 合宿
+                    option(value='C160B1N1M') 課題本提案
+            .form-group
+                label.form-control-label(for='limit') Limit:
+                select.form-control(id='limit', name='limit')
+                    option(value='30') 30 (default)
+                    option(value='50') 50
+                    option(value='100') 100
+            .form-group
+                input.form-control.btn-primary(type='submit', value='Search')
+        table.table.table-striped
+            thread
+                tr
+                    th Date
+                    th Channel
+                    th User
+                    th Message
+            tbody
+                each message, i in messages
+                    tr
+                        td= moment(message.time).format('YYYY/MM/DD HH:mm')
+                        td #{message.channelName}
+                        td #{message.fromUser}
+                        td #{message.text}
