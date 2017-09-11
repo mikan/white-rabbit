@@ -1,6 +1,5 @@
 # Node.js
 node_modules
-bin
 
 # node-config
 config/*
