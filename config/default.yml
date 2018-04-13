@@ -9,6 +9,7 @@ ldap:
   searchFilter: "(uid={{username}})"
 mongodb:
   url: "mongodb://user:********@localhost:27017/slacklog?autoReconnect=true"
+  db: "slacklog"
   collection: "aosn"
 search:
   limit: 30

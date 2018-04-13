@@ -1,10 +1,10 @@
 var config = require('config');
 var MongoClient = require('mongodb').MongoClient;
 var db;
-MongoClient.connect(config.get('mongodb.url'), function (err, database) {
+MongoClient.connect(config.get('mongodb.url'), function (err, client) {
     if (err) throw err;
     console.log("Database connected.");
-    db = database;
+    db = client.db(config.get('mongodb.db'));
 });
 
 function messages() {
