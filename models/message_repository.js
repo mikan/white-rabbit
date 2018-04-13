@@ -1,14 +1,14 @@
 require('dotenv').config();
 var MongoClient = require('mongodb').MongoClient;
 var db;
-MongoClient.connect(process.env.MONGO_URL, function (err, client) {
+MongoClient.connect(process.env.MONGODB_URI + "?autoReconnect=true", function (err, client) {
     if (err) throw err;
     console.log("Database connected.");
-    db = client.db(process.env.MONGO_DB);
+    db = client.db(process.env.MONGODB_DB);
 });
 
 function messages() {
-    return db.collection(process.env.MONGO_COLLECTION);
+    return db.collection(process.env.MONGODB_COLLECTION);
 }
 
 function search(query, channnel, limit, callback) {

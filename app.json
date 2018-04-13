@@ -4,7 +4,13 @@
   "repository": "https://github.com/mikan/white-rabbit",
   "logo": "https://github.com/aosn.png",
   "keywords": [
-    "node"
+    "node",
+    "express"
+  ],
+  "addons": [
+    {
+      "plan": "mongolab:sandbox"
+    }
   ],
   "env": {
     "SESSION_SECRET": {
@@ -30,14 +36,10 @@
       "description": "LDAP search filter",
       "value": "(uid={{username}})"
     },
-    "MONGO_URL": {
-      "description": "MongoDB server URL",
-      "value": "mongodb://<USER>:<PASSWORD>@foo.bar.com:27017/<DB>?autoReconnect=true"
-    },
-    "MONGO_DB": {
+    "MONGODB_DB": {
       "description": "MongoDB database name"
     },
-    "MONGO_COLLECTION": {
+    "MONGODB_COLLECTION": {
       "description": "MongoDB collection"
     },
     "SEARCH_LIMIT": {
