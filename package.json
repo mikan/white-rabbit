@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "lint": "eslint src"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -20,5 +21,8 @@
     "passport": "^0.4.0",
     "passport-ldapauth": "^2.0.0",
     "serve-favicon": "~2.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
   }
 }

@@ -4,7 +4,7 @@ var url = require('url');
 var repository = require('../models/message_repository');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     if (req.isAuthenticated()) {
         var params = url.parse(req.url, true).query;
         repository.search(params.q, params.channel, params.limit, function (result) {
