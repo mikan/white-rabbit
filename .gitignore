@@ -4,9 +4,8 @@ node_modules
 # dotenv
 .env
 
-# node-config
-config/*
-!config/default.yml
+# New Relic
+*.log
 
 # IntelliJ
 .idea

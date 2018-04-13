@@ -1,18 +1,21 @@
 require('dotenv').config();
-var express = require('express');
-var session = require('express-session');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var LdapStrategy = require('passport-ldapauth');
+if (process.env.NEW_RELIC_LICENSE_KEY) {
+    require('newrelic');
+}
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const LdapStrategy = require('passport-ldapauth');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,17 +31,17 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie : { httpOnly: true, maxAge: 2419200000 }
+    cookie: {httpOnly: true, maxAge: 2419200000}
 }));
 
 // passport w/ ldap
-var ldap = {
+const ldap = {
     url: process.env.LDAP_URL,
     bindDN: process.env.LDAP_BIND_DN,
     bindCredentials: process.env.LDAP_BIND_CRED,
     searchBase: process.env.LDAP_SEARCH_BASE,
-    searchFilter:process.env.LDAP_SEARCH_FILTER
-}
+    searchFilter: process.env.LDAP_SEARCH_FILTER
+};
 passport.use(new LdapStrategy({server: ldap}));
 app.use(passport.initialize());
 app.post('/login', passport.authenticate('ldapauth', {
@@ -60,7 +63,7 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
