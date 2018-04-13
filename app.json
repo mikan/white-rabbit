@@ -36,9 +36,6 @@
       "description": "LDAP search filter",
       "value": "(uid={{username}})"
     },
-    "MONGODB_DB": {
-      "description": "MongoDB database name"
-    },
     "MONGODB_COLLECTION": {
       "description": "MongoDB collection"
     },

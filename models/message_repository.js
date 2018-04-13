@@ -4,7 +4,7 @@ var db;
 MongoClient.connect(process.env.MONGODB_URI + "?autoReconnect=true", function (err, client) {
     if (err) throw err;
     console.log("Database connected.");
-    db = client.db(process.env.MONGODB_DB);
+    db = client.db(process.env.MONGODB_URI.replace(/^.*[\\/]/, ''));
 });
 
 function messages() {
@@ -22,19 +22,6 @@ function search(query, channnel, limit, callback) {
         q.channel = channnel;
     }
     var l = Number(process.env.SEARCH_LIMIT);
-    switch (l) {
-        case 30:
-            l = 30;
-            break;
-        case 50:
-            l = 50;
-            break;
-        case 100:
-            l = 100;
-            break;
-        default:
-            break; // custom values are ignored
-    }
     messages().find(q, {"sort": [['time', 'desc']]}).limit(l).toArray(function (err, result) {
         if (err) throw err;
         console.log("search(" + query + ") fetched " + result.length + " message(s).");
