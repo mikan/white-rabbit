@@ -1,5 +1,7 @@
 # White Rabbit
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mikan/white-rabbit)
+
 AOSN読書会 Slack 過去ログ倉庫検索システム
 
 ## Setup

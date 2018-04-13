@@ -1,0 +1,48 @@
+{
+  "name": "White Rabbit",
+  "description": "View & Search the Slack Archive",
+  "repository": "https://github.com/mikan/white-rabbit",
+  "logo": "https://github.com/aosn.png",
+  "keywords": [
+    "node"
+  ],
+  "env": {
+    "SESSION_SECRET": {
+      "description": "Session secret",
+      "value": "white-rabbit"
+    },
+    "LDAP_URL": {
+      "description": "LDAP server URL",
+      "value": "ldap://foo.bar.com:389"
+    },
+    "LDAP_BIND_DN": {
+      "description": "LDAP bind DN",
+      "value": "cn=foo,dc=bar,dc=com"
+    },
+    "LDAP_BIND_CRED": {
+      "description": "LDAP bind credential"
+    },
+    "LDAP_SEARCH_BASE": {
+      "description": "LDAP search base",
+      "value": "dc=bar,dc=com"
+    },
+    "LDAP_SEARCH_FILTER": {
+      "description": "LDAP search filter",
+      "value": "(uid={{username}})"
+    },
+    "MONGO_URL": {
+      "description": "MongoDB server URL",
+      "value": "mongodb://<USER>:<PASSWORD>@foo.bar.com:27017/<DB>?autoReconnect=true"
+    },
+    "MONGO_DB": {
+      "description": "MongoDB database name"
+    },
+    "MONGO_COLLECTION": {
+      "description": "MongoDB collection"
+    },
+    "SEARCH_LIMIT": {
+      "description": "Limit for search messages",
+      "value": 30
+    }
+  }
+}
