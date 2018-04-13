@@ -1,14 +1,14 @@
-var config = require('config');
+require('dotenv').config();
 var MongoClient = require('mongodb').MongoClient;
 var db;
-MongoClient.connect(config.get('mongodb.url'), function (err, client) {
+MongoClient.connect(process.env.MONGO_URL, function (err, client) {
     if (err) throw err;
     console.log("Database connected.");
-    db = client.db(config.get('mongodb.db'));
+    db = client.db(process.env.MONGO_DB);
 });
 
 function messages() {
-    return db.collection(config.get('mongodb.collection'));
+    return db.collection(process.env.MONGO_COLLECTION);
 }
 
 function search(query, channnel, limit, callback) {
@@ -21,7 +21,7 @@ function search(query, channnel, limit, callback) {
     if (channnel) {
         q.channel = channnel;
     }
-    var l = config.get('search.limit');
+    var l = Number(process.env.SEARCH_LIMIT);
     switch (l) {
         case 30:
             l = 30;

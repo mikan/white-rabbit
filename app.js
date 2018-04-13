@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
@@ -5,7 +6,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var config = require('config');
 var passport = require('passport');
 var LdapStrategy = require('passport-ldapauth');
 
@@ -25,14 +25,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: config.get('session.secret'),
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie : { httpOnly: true, maxAge: 2419200000 }
 }));
 
 // passport w/ ldap
-passport.use(new LdapStrategy({server: config.get('ldap')}));
+var ldap = {
+    url: process.env.LDAP_URL,
+    bindDN: process.env.LDAP_BIND_DN,
+    bindCredentials: process.env.LDAP_BIND_CRED,
+    searchBase: process.env.LDAP_SEARCH_BASE,
+    searchFilter:process.env.LDAP_SEARCH_FILTER
+}
+passport.use(new LdapStrategy({server: ldap}));
 app.use(passport.initialize());
 app.post('/login', passport.authenticate('ldapauth', {
     session: true,
