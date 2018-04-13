@@ -44,7 +44,7 @@
     },
     "SEARCH_LIMIT": {
       "description": "Limit for search messages",
-      "value": 30
+      "value": "30"
     }
   }
 }
