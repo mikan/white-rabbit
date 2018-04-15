@@ -2,6 +2,9 @@ require('dotenv').config();
 if (process.env.NEW_RELIC_LICENSE_KEY) {
     require('newrelic');
 }
+if (process.env.SQREEN_TOKEN) {
+    require('sqreen');
+}
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
